@@ -1,5 +1,4 @@
 #include "Board.hpp"
-#include <stdexcept>
 
 namespace minesweeper
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstddef>
+#include <stdexcept>
 #include <vector>
 
 namespace minesweeper
@@ -20,6 +21,35 @@ enum class State
     Seven,
     Eight,
 };
+
+inline unsigned StateToNumber(State state)
+{
+    switch (state)
+    {
+    case State::Empty:
+        return 0;
+    case State::One:
+        return 1;
+    case State::Two:
+        return 2;
+    case State::Three:
+        return 3;
+    case State::Four:
+        return 4;
+    case State::Five:
+        return 5;
+    case State::Six:
+        return 6;
+    case State::Seven:
+        return 7;
+    case State::Eight:
+        return 8;
+    case State::Mine:
+        break;
+    }
+
+    throw std::runtime_error("Invalid State");
+}
 
 enum class VisibleState
 {
