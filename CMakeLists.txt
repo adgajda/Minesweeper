@@ -15,7 +15,6 @@ set(GCC_WARNINGS
     -Wunused
     -Woverloaded-virtual
     -Wpedantic
-    -Wconversion
     -Wsign-conversion
     -Wnull-dereference
     -Wdouble-promotion
