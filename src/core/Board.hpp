@@ -47,14 +47,15 @@ public:
     void initBoard(const std::vector<CellPosition>& minesPositions);
     void revealCell(const CellPosition& position);
     void flagCell(const CellPosition& position);
-    bool isCellRevealed(const CellPosition& position);
-    bool isCellFlagged(const CellPosition& position);
-    State getCellState(const CellPosition& position);
+    void unflagCell(const CellPosition& position);
+    [[nodiscard]] bool isCellRevealed(const CellPosition& position) const;
+    [[nodiscard]] bool isCellFlagged(const CellPosition& position) const;
+    [[nodiscard]] State getCellState(const CellPosition& position) const;
 
 private:
     void placeMines(const std::vector<CellPosition>& minesPositions);
     void setNumberOfSurroundingMines();
-    State numberToState(unsigned number);
+    [[nodiscard]] State numberToState(unsigned number) const;
 
     std::vector<std::vector<Cell>> matrix;
 };

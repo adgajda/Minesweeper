@@ -25,22 +25,27 @@ void Board::flagCell(const CellPosition& position)
     matrix[position.x][position.y].visibleState = VisibleState::Flagged;
 }
 
+void Board::unflagCell(const CellPosition& position)
+{
+    matrix[position.x][position.y].visibleState = VisibleState::Covered;
+}
+
 void Board::revealCell(const CellPosition& position)
 {
     matrix[position.x][position.y].visibleState = VisibleState::Revealed;
 }
 
-bool Board::isCellRevealed(const CellPosition& position)
+bool Board::isCellRevealed(const CellPosition& position) const
 {
     return matrix[position.x][position.y].visibleState == VisibleState::Revealed;
 }
 
-bool Board::isCellFlagged(const CellPosition& position)
+bool Board::isCellFlagged(const CellPosition& position) const
 {
     return matrix[position.x][position.y].visibleState == VisibleState::Flagged;
 }
 
-State Board::getCellState(const CellPosition& position)
+State Board::getCellState(const CellPosition& position) const
 {
     return matrix[position.x][position.y].state;
 }
@@ -104,7 +109,7 @@ void Board::setNumberOfSurroundingMines()
     }
 }
 
-State Board::numberToState(unsigned number)
+State Board::numberToState(unsigned number) const
 {
     switch (number)
     {
