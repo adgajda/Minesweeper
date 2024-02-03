@@ -1,6 +1,8 @@
 #pragma once
+#include <array>
 #include <cstddef>
 #include <stdexcept>
+#include <utility>
 #include <vector>
 
 namespace minesweeper
@@ -71,6 +73,10 @@ struct CellPosition
     }
     size_t x_{ 0 };
     size_t y_{ 0 };
+};
+
+inline constexpr std::array<std::pair<int, int>, 8> cellNeighbors = {
+    { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } }
 };
 
 class Board final

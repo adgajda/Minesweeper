@@ -90,47 +90,15 @@ void Board::setNumberOfSurroundingMines()
             const auto isCellValid = [this](const CellPosition& cellPos) {
                 return cellPos.x_ < matrix_.size() && cellPos.y_ < matrix_.size();
             };
-            if (const CellPosition cellToReveal(i - 1, j - 1);
-                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
+            for (const auto& neighbor : cellNeighbors)
             {
-                ++minesCounter;
+                const CellPosition cellToReveal(
+                  i + static_cast<size_t>(neighbor.first), j + static_cast<size_t>(neighbor.second));
+                if (isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
+                {
+                    ++minesCounter;
+                }
             }
-            if (const CellPosition cellToReveal(i - 1, j);
-                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
-            {
-                ++minesCounter;
-            }
-            if (const CellPosition cellToReveal(i - 1, j + 1);
-                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
-            {
-                ++minesCounter;
-            }
-            if (const CellPosition cellToReveal(i, j - 1);
-                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
-            {
-                ++minesCounter;
-            }
-            if (const CellPosition cellToReveal(i, j + 1);
-                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
-            {
-                ++minesCounter;
-            }
-            if (const CellPosition cellToReveal(i + 1, j - 1);
-                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
-            {
-                ++minesCounter;
-            }
-            if (const CellPosition cellToReveal(i + 1, j);
-                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
-            {
-                ++minesCounter;
-            }
-            if (const CellPosition cellToReveal(i + 1, j + 1);
-                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
-            {
-                ++minesCounter;
-            }
-
             matrix_[i][j].state_ = numberToState(minesCounter);
         }
     }

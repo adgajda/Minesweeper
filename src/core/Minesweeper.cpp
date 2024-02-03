@@ -48,64 +48,29 @@ void Minesweeper::revealCell(CellPosition cell)
         onMineRevealed(cell);
         return;
     }
-    else if (cellState == State::Empty)
-    {
-        board_.revealCell(cell);
-        if (board_.isGameWon())
-        {
-            gameEnded = true;
-            onCellRevealed(cell, 0);
-            onGameWon();
-            return;
-        }
-        onCellRevealed(cell, 0);
 
+    board_.revealCell(cell);
+    onCellRevealed(cell, StateToNumber(cellState));
+    if (board_.isGameWon())
+    {
+        gameEnded = true;
+        onGameWon();
+        return;
+    }
+
+    if (cellState == State::Empty)
+    {
         const auto isCellValid = [this](const CellPosition& cellPos) {
             return cellPos.x_ < boardSize_ && cellPos.y_ < boardSize_;
         };
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_ - 1); isCellValid(cellToReveal))
+        for (const auto& neighbor : cellNeighbors)
         {
-            revealCell(cellToReveal);
-        }
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
-        {
-            revealCell(cellToReveal);
-        }
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_ + 1); isCellValid(cellToReveal))
-        {
-            revealCell(cellToReveal);
-        }
-        if (const CellPosition cellToReveal(cell.x_, cell.y_ - 1); isCellValid(cellToReveal))
-        {
-            revealCell(cellToReveal);
-        }
-        if (const CellPosition cellToReveal(cell.x_, cell.y_ + 1); isCellValid(cellToReveal))
-        {
-            revealCell(cellToReveal);
-        }
-        if (const CellPosition cellToReveal(cell.x_ + 1, cell.y_ - 1); isCellValid(cellToReveal))
-        {
-            revealCell(cellToReveal);
-        }
-        if (const CellPosition cellToReveal(cell.x_ + 1, cell.y_); isCellValid(cellToReveal))
-        {
-            revealCell(cellToReveal);
-        }
-        if (const CellPosition cellToReveal(cell.x_ + 1, cell.y_ + 1); isCellValid(cellToReveal))
-        {
-            revealCell(cellToReveal);
-        }
-
-        return;
-    }
-    else
-    {
-        board_.revealCell(cell);
-        onCellRevealed(cell, StateToNumber(cellState));
-        if (board_.isGameWon())
-        {
-            gameEnded = true;
-            onGameWon();
+            const CellPosition cellToReveal(
+              cell.x_ + static_cast<size_t>(neighbor.first), cell.y_ + static_cast<size_t>(neighbor.second));
+            if (isCellValid(cellToReveal))
+            {
+                revealCell(cellToReveal);
+            }
         }
     }
 }
