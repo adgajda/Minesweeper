@@ -1,8 +1,8 @@
 #pragma once
+#include "MinesweeperSFML.hpp"
 #include <SFML/Graphics.hpp>
 #include <cstddef>
 #include <memory>
-#include "TexturesManager.hpp"
 
 namespace minesweeper
 {
@@ -17,7 +17,7 @@ public:
     void gameLoop();
 
 private:
-    TexturesManager<MinesweeperTextures> texturesManager_;
+    std::unique_ptr<MinesweeperSFML> minesweeperSFML_;
     std::unique_ptr<sf::RenderWindow> window_;
     size_t boardSize_;
     unsigned numberOfMines_;

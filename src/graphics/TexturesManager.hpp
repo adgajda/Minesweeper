@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics/Texture.hpp>
+#include <stdexcept>
 #include <string>
 #include <string_view>
 #include <unordered_map>

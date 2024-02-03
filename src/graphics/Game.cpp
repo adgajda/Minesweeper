@@ -5,28 +5,14 @@ namespace minesweeper
 namespace graphics
 {
 
-Game::Game(size_t boardSize, unsigned numberOfMines)
-  : texturesManager_("../textures/"), boardSize_{ boardSize }, numberOfMines_{ numberOfMines }
-// TODO: PATH should not be hardcoded
+Game::Game(size_t boardSize, unsigned numberOfMines) : boardSize_{ boardSize }, numberOfMines_{ numberOfMines }
 {
 }
 
 void Game::initGame()
 {
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_0.png", MinesweeperTextures::Empty);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_1.png", MinesweeperTextures::One);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_2.png", MinesweeperTextures::Two);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_3.png", MinesweeperTextures::Three);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_4.png", MinesweeperTextures::Four);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_5.png", MinesweeperTextures::Five);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_6.png", MinesweeperTextures::Six);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_7.png", MinesweeperTextures::Seven);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_8.png", MinesweeperTextures::Eight);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_mine_hit.png", MinesweeperTextures::MineHit);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_mine.png", MinesweeperTextures::Mine);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_flag.png", MinesweeperTextures::Flag);
-    texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_unexplored.png", MinesweeperTextures::Covered);
     const unsigned cellSize{ 21 };
+    minesweeperSFML_ = std::make_unique<MinesweeperSFML>(boardSize_, numberOfMines_);
     window_ =
       std::make_unique<sf::RenderWindow>(sf::VideoMode(boardSize_ * cellSize, boardSize_ * cellSize), "Minesweeper");
 }
@@ -43,6 +29,7 @@ void Game::gameLoop()
         }
 
         window_->clear();
+        minesweeperSFML_->draw(*window_);
         window_->display();
     }
 }
