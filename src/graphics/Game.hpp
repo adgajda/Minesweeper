@@ -1,5 +1,6 @@
 #pragma once
 #include "MinesweeperSFML.hpp"
+#include "MouseListener.hpp"
 #include <SFML/Graphics.hpp>
 #include <cstddef>
 #include <memory>
@@ -19,6 +20,7 @@ public:
 private:
     std::unique_ptr<MinesweeperSFML> minesweeperSFML_;
     std::unique_ptr<sf::RenderWindow> window_;
+    std::unique_ptr<MouseListener> mouseListener_;
     size_t boardSize_;
     unsigned numberOfMines_;
 };

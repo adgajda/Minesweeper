@@ -6,6 +6,7 @@ add_executable(minesweeper
     core/Minesweeper.cpp
     graphics/Game.cpp
     graphics/MinesweeperSFML.cpp
+    graphics/MouseListener.cpp
 )
 
 target_include_directories(minesweeper PRIVATE ${CMAKE_SOURCE_DIR}/src)

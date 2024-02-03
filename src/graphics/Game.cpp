@@ -13,6 +13,9 @@ void Game::initGame()
 {
     const unsigned cellSize{ 21 };
     minesweeperSFML_ = std::make_unique<MinesweeperSFML>(boardSize_, numberOfMines_);
+    mouseListener_ = std::make_unique<MouseListener>();
+    mouseListener_->addLeftButtonCallback([this](core::CellPosition cell) { minesweeperSFML_->revealCell(cell); });
+    mouseListener_->addLeftButtonCallback([this](core::CellPosition cell) { minesweeperSFML_->markCell(cell); });
     window_ =
       std::make_unique<sf::RenderWindow>(sf::VideoMode(boardSize_ * cellSize, boardSize_ * cellSize), "Minesweeper");
 }
@@ -27,6 +30,8 @@ void Game::gameLoop()
             if (event.type == sf::Event::Closed)
                 window_->close();
         }
+
+        mouseListener_->listen(*window_);
 
         window_->clear();
         minesweeperSFML_->draw(*window_);
