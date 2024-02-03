@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cstddef>
 #include <memory>
+#include "TexturesManager.hpp"
 
 namespace minesweeper
 {
@@ -16,6 +17,9 @@ public:
     void gameLoop();
 
 private:
+    void draw();
+
+    TexturesManager<MinesweeperTextures> texturesManager_;
     std::unique_ptr<sf::RenderWindow> window_;
     size_t boardSize_;
     unsigned numberOfMines_;
