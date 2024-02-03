@@ -9,7 +9,7 @@ namespace minesweeper
 namespace graphics
 {
 
-class Game
+class Game final
 {
 public:
     Game(size_t boardSize, unsigned numberOfMines);
@@ -17,8 +17,6 @@ public:
     void gameLoop();
 
 private:
-    void draw();
-
     TexturesManager<MinesweeperTextures> texturesManager_;
     std::unique_ptr<sf::RenderWindow> window_;
     size_t boardSize_;

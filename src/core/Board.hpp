@@ -73,7 +73,7 @@ struct CellPosition
     size_t y_{ 0 };
 };
 
-class Board
+class Board final
 {
 public:
     explicit Board(size_t boardSize);

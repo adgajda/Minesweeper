@@ -43,15 +43,9 @@ void Game::gameLoop()
         }
 
         window_->clear();
-        draw();
         window_->display();
     }
 }
-
-void Game::draw()
-{
-}
-
 
 }// namespace graphics
 }// namespace minesweeper

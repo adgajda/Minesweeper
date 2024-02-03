@@ -27,7 +27,7 @@ enum class MinesweeperTextures
 };
 
 template<typename T>
-class TexturesManager
+class TexturesManager final
 {
 public:
     TexturesManager(std::string_view texturesPath) : texturesPath_{ texturesPath }
@@ -44,7 +44,7 @@ public:
         textures_.emplace(textureType, loadTextureFromFile(texturesPath_ + fileName));
     }
 
-    const sf::Texture& getTexture(T textureType)
+    [[nodiscard]] const sf::Texture& getTexture(T textureType)
     {
         if (const auto it = textures_.find(textureType); it != textures_.end())
         {

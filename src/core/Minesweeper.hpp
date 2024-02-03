@@ -23,7 +23,7 @@ public:
 
 protected:
     virtual void onMineRevealed(const CellPosition& cell) = 0;
-    virtual void onCellRevealead(const CellPosition& cell, unsigned minesAround) = 0;
+    virtual void onCellRevealed(const CellPosition& cell, unsigned minesAround) = 0;
     virtual void onCellFlagged(const CellPosition& cell) = 0;
     virtual void onCellFlagRemoved(const CellPosition& cell) = 0;
 

@@ -8,7 +8,7 @@ namespace minesweeper
 namespace core
 {
 
-class MineGenerator
+class MineGenerator final
 {
 public:
     explicit MineGenerator(size_t boardSize);

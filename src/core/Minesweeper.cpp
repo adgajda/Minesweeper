@@ -37,7 +37,7 @@ void Minesweeper::revealCell(CellPosition cell)
     if (cellState == State::Empty)
     {
         board_.revealCell(cell);
-        onCellRevealead(cell, 0);
+        onCellRevealed(cell, 0);
 
         const auto isCellValid = [this](const CellPosition& cellPos) {
             return cellPos.x_ < boardSize_ && cellPos.y_ < boardSize_;
@@ -79,7 +79,7 @@ void Minesweeper::revealCell(CellPosition cell)
     }
 
     board_.revealCell(cell);
-    onCellRevealead(cell, StateToNumber(cellState));
+    onCellRevealed(cell, StateToNumber(cellState));
 }
 
 void Minesweeper::markCell(CellPosition cell)
