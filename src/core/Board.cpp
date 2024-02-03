@@ -70,36 +70,46 @@ void Board::setNumberOfSurroundingMines()
             }
 
             unsigned minesCounter{ 0 };
-            const auto isInRange = [this](size_t x, size_t y) { return x < matrix_.size() && y < matrix_.size(); };
-            if (isInRange(i - 1, j - 1) && matrix_[i - 1][j].state_ == State::Mine)
+            const auto isCellValid = [this](const CellPosition& cellPos) {
+                return cellPos.x_ < matrix_.size() && cellPos.y_ < matrix_.size();
+            };
+            if (const CellPosition cellToReveal(i - 1, j - 1);
+                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i - 1, j) && matrix_[i - 1][j].state_ == State::Mine)
+            if (const CellPosition cellToReveal(i - 1, j);
+                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i - 1, j + 1) && matrix_[i - 1][j].state_ == State::Mine)
+            if (const CellPosition cellToReveal(i - 1, j + 1);
+                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i, j - 1) && matrix_[i - 1][j].state_ == State::Mine)
+            if (const CellPosition cellToReveal(i, j - 1);
+                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i, j + 1) && matrix_[i - 1][j].state_ == State::Mine)
+            if (const CellPosition cellToReveal(i, j + 1);
+                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i + 1, j - 1) && matrix_[i - 1][j].state_ == State::Mine)
+            if (const CellPosition cellToReveal(i + 1, j - 1);
+                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i + 1, j) && matrix_[i - 1][j].state_ == State::Mine)
+            if (const CellPosition cellToReveal(i + 1, j);
+                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i + 1, j + 1) && matrix_[i - 1][j].state_ == State::Mine)
+            if (const CellPosition cellToReveal(i + 1, j + 1);
+                isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
             {
                 ++minesCounter;
             }
