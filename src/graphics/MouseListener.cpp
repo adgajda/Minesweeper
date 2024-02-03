@@ -26,10 +26,10 @@ void MouseListener::listen(sf::RenderWindow& window)
     }
 
     const unsigned cellSize{ 21 };
+    const core::CellPosition cellPos(
+      static_cast<unsigned int>(mousePosition.x) / cellSize, static_cast<unsigned int>(mousePosition.y) / cellSize);
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
-        const core::CellPosition cellPos(
-          static_cast<unsigned int>(mousePosition.x) / cellSize, static_cast<unsigned int>(mousePosition.y) / cellSize);
         if (leftButtonCallBack_)
         {
             lastButtonPressTime = std::chrono::high_resolution_clock::now();
@@ -38,8 +38,6 @@ void MouseListener::listen(sf::RenderWindow& window)
     }
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
     {
-        const core::CellPosition cellPos(
-          static_cast<unsigned int>(mousePosition.x) / cellSize, static_cast<unsigned int>(mousePosition.y) / cellSize);
         if (rightButtonCallBack_)
         {
             lastButtonPressTime = std::chrono::high_resolution_clock::now();
@@ -48,8 +46,6 @@ void MouseListener::listen(sf::RenderWindow& window)
     }
     if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
     {
-        const core::CellPosition cellPos(
-          static_cast<unsigned int>(mousePosition.x) / cellSize, static_cast<unsigned int>(mousePosition.y) / cellSize);
         if (middleButtonCallBack_)
         {
             lastButtonPressTime = std::chrono::high_resolution_clock::now();
@@ -72,7 +68,6 @@ void MouseListener::addMiddleButtonCallback(std::function<void()>&& callback)
 {
     middleButtonCallBack_ = std::move(callback);
 }
-
 
 }// namespace graphics
 }// namespace minesweeper

@@ -27,13 +27,14 @@ protected:
     virtual void onCellFlagged(const CellPosition& cell) = 0;
     virtual void onCellFlagRemoved(const CellPosition& cell) = 0;
     virtual void onRestart() = 0;
-
+    virtual void onGameWon() = 0;
     ~Minesweeper() = default;
+
+    Board board_;
 
 private:
     void init(CellPosition firstRevealedCell);
 
-    Board board_;
     size_t boardSize_;
     unsigned numberOfMines_;
     bool gameEnded = false;

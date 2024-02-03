@@ -8,7 +8,7 @@ namespace minesweeper
 namespace graphics
 {
 
-class MouseListener
+class MouseListener final
 {
 public:
     void listen(sf::RenderWindow& window);

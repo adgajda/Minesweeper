@@ -11,6 +11,9 @@ Board::Board(size_t boardSize) : boardSize_{ boardSize }
 
 void Board::initBoard(const std::vector<CellPosition>& minesPositions)
 {
+    mines_ = minesPositions;
+    numberOfMines_ = minesPositions.size();
+    cellsRevealed_ = 0;
     matrix_.clear();
     matrix_.resize(boardSize_);
     for (auto& row : matrix_)
@@ -19,6 +22,18 @@ void Board::initBoard(const std::vector<CellPosition>& minesPositions)
     }
     placeMines(minesPositions);
     setNumberOfSurroundingMines();
+}
+
+bool Board::isGameWon() const
+{
+    const auto numberOfCells{ boardSize_ * boardSize_ };
+    const auto cellsLeft{ numberOfCells - cellsRevealed_ };
+    return cellsLeft == numberOfMines_;
+}
+
+std::vector<CellPosition> Board::getMinesPositions() const
+{
+    return mines_;
 }
 
 void Board::flagCell(const CellPosition& position)
@@ -33,6 +48,7 @@ void Board::unflagCell(const CellPosition& position)
 
 void Board::revealCell(const CellPosition& position)
 {
+    ++cellsRevealed_;
     matrix_[position.x_][position.y_].visibleState_ = VisibleState::Revealed;
 }
 

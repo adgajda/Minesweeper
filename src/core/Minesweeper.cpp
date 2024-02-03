@@ -28,18 +28,14 @@ void Minesweeper::restart()
 
 void Minesweeper::revealCell(CellPosition cell)
 {
-    if (gameEnded)
-    {
-        return;
-    }
-    if (isFirstReveal)
+    if (isFirstReveal && !gameEnded)
     {
         isFirstReveal = false;
         init(cell);
         return;
     }
 
-    if (board_.isCellRevealed(cell) || board_.isCellFlagged(cell))
+    if (gameEnded || board_.isCellRevealed(cell) || board_.isCellFlagged(cell))
     {
         return;
     }
@@ -52,10 +48,16 @@ void Minesweeper::revealCell(CellPosition cell)
         onMineRevealed(cell);
         return;
     }
-
-    if (cellState == State::Empty)
+    else if (cellState == State::Empty)
     {
         board_.revealCell(cell);
+        if (board_.isGameWon())
+        {
+            gameEnded = true;
+            onCellRevealed(cell, 0);
+            onGameWon();
+            return;
+        }
         onCellRevealed(cell, 0);
 
         const auto isCellValid = [this](const CellPosition& cellPos) {
@@ -96,19 +98,21 @@ void Minesweeper::revealCell(CellPosition cell)
 
         return;
     }
-
-    board_.revealCell(cell);
-    onCellRevealed(cell, StateToNumber(cellState));
+    else
+    {
+        board_.revealCell(cell);
+        onCellRevealed(cell, StateToNumber(cellState));
+        if (board_.isGameWon())
+        {
+            gameEnded = true;
+            onGameWon();
+        }
+    }
 }
 
 void Minesweeper::markCell(CellPosition cell)
 {
-    if (gameEnded)
-    {
-        return;
-    }
-
-    if (board_.isCellRevealed(cell))
+    if (gameEnded || board_.isCellRevealed(cell))
     {
         return;
     }

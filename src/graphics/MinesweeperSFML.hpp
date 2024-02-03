@@ -21,6 +21,7 @@ private:
     void onCellFlagged(const core::CellPosition& cell) override;
     void onCellFlagRemoved(const core::CellPosition& cell) override;
     void onRestart() override;
+    void onGameWon() override;
 
     TexturesManager<MinesweeperTextures> texturesManager_;
     std::vector<std::vector<sf::Sprite>> cellSprites_;

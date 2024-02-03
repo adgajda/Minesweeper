@@ -31,7 +31,7 @@ template<typename T>
 class TexturesManager final
 {
 public:
-    TexturesManager(std::string_view texturesPath) : texturesPath_{ texturesPath }
+    explicit TexturesManager(std::string_view texturesPath) : texturesPath_{ texturesPath }
     {
     }
 

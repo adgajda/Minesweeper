@@ -84,6 +84,8 @@ public:
     [[nodiscard]] bool isCellRevealed(const CellPosition& position) const;
     [[nodiscard]] bool isCellFlagged(const CellPosition& position) const;
     [[nodiscard]] State getCellState(const CellPosition& position) const;
+    [[nodiscard]] bool isGameWon() const;
+    [[nodiscard]] std::vector<CellPosition> getMinesPositions() const;
 
 private:
     void placeMines(const std::vector<CellPosition>& minesPositions);
@@ -91,7 +93,10 @@ private:
     [[nodiscard]] State numberToState(unsigned number) const;
 
     std::vector<std::vector<Cell>> matrix_;
+    std::vector<CellPosition> mines_;
     size_t boardSize_;
+    unsigned numberOfMines_ = 0;
+    unsigned cellsRevealed_ = 0;
 };
 
 }// namespace core

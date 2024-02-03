@@ -1,4 +1,5 @@
 #include "MinesweeperSFML.hpp"
+#include "core/Board.hpp"
 
 namespace minesweeper
 {
@@ -113,6 +114,16 @@ void MinesweeperSFML::onRestart()
         {
             sprite.setTexture(texturesManager_.getTexture(MinesweeperTextures::Covered));
         }
+    }
+}
+
+void MinesweeperSFML::onGameWon()
+{
+    std::vector<core::CellPosition> mines = board_.getMinesPositions();
+    for (const auto& minePosition : mines)
+    {
+        cellSprites_[minePosition.x_][minePosition.y_].setTexture(
+          texturesManager_.getTexture(MinesweeperTextures::Mine));
     }
 }
 
