@@ -16,6 +16,7 @@ void Game::initGame()
     mouseListener_ = std::make_unique<MouseListener>();
     mouseListener_->addLeftButtonCallback([this](core::CellPosition cell) { minesweeperSFML_->revealCell(cell); });
     mouseListener_->addRightButtonCallback([this](core::CellPosition cell) { minesweeperSFML_->markCell(cell); });
+    mouseListener_->addMiddleButtonCallback([this]() { minesweeperSFML_->restart(); });
 
     window_ =
       std::make_unique<sf::RenderWindow>(sf::VideoMode(boardSize_ * cellSize, boardSize_ * cellSize), "Minesweeper");

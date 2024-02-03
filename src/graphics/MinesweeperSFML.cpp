@@ -52,6 +52,13 @@ void MinesweeperSFML::draw(sf::RenderWindow& window)
 
 void MinesweeperSFML::onMineRevealed(const core::CellPosition&)
 {
+    for (auto& row : cellSprites_)
+    {
+        for (auto& sprite : row)
+        {
+            sprite.setTexture(texturesManager_.getTexture(MinesweeperTextures::MineHit));
+        }
+    }
 }
 
 void MinesweeperSFML::onCellRevealed(const core::CellPosition& cell, unsigned minesAround)
@@ -96,6 +103,17 @@ void MinesweeperSFML::onCellFlagged(const core::CellPosition& cell)
 void MinesweeperSFML::onCellFlagRemoved(const core::CellPosition& cell)
 {
     cellSprites_[cell.x_][cell.y_].setTexture(texturesManager_.getTexture(MinesweeperTextures::Covered));
+}
+
+void MinesweeperSFML::onRestart()
+{
+    for (auto& row : cellSprites_)
+    {
+        for (auto& sprite : row)
+        {
+            sprite.setTexture(texturesManager_.getTexture(MinesweeperTextures::Covered));
+        }
+    }
 }
 
 }// namespace graphics

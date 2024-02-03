@@ -91,6 +91,7 @@ private:
     [[nodiscard]] State numberToState(unsigned number) const;
 
     std::vector<std::vector<Cell>> matrix_;
+    size_t boardSize_;
 };
 
 }// namespace core

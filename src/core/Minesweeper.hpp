@@ -17,6 +17,7 @@ public:
     Minesweeper(Minesweeper&&) = delete;
     Minesweeper& operator=(Minesweeper&&) = delete;
 
+    void restart();
     void revealCell(CellPosition cell);
     void markCell(CellPosition cell);
 
@@ -25,6 +26,7 @@ protected:
     virtual void onCellRevealed(const CellPosition& cell, unsigned minesAround) = 0;
     virtual void onCellFlagged(const CellPosition& cell) = 0;
     virtual void onCellFlagRemoved(const CellPosition& cell) = 0;
+    virtual void onRestart() = 0;
 
     ~Minesweeper() = default;
 
@@ -34,6 +36,8 @@ private:
     Board board_;
     size_t boardSize_;
     unsigned numberOfMines_;
+    bool gameEnded = false;
+    bool isFirstReveal = true;
 };
 
 }// namespace core

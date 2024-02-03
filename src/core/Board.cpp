@@ -5,17 +5,18 @@ namespace minesweeper
 namespace core
 {
 
-Board::Board(size_t boardSize)
+Board::Board(size_t boardSize) : boardSize_{ boardSize }
 {
-    matrix_.resize(boardSize);
-    for (auto& row : matrix_)
-    {
-        row.resize(boardSize);
-    }
 }
 
 void Board::initBoard(const std::vector<CellPosition>& minesPositions)
 {
+    matrix_.clear();
+    matrix_.resize(boardSize_);
+    for (auto& row : matrix_)
+    {
+        row.resize(boardSize_);
+    }
     placeMines(minesPositions);
     setNumberOfSurroundingMines();
 }

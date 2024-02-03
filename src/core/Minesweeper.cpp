@@ -19,9 +19,19 @@ void Minesweeper::init(CellPosition firstRevealedCell)
     revealCell(firstRevealedCell);
 }
 
+void Minesweeper::restart()
+{
+    gameEnded = false;
+    isFirstReveal = true;
+    onRestart();
+}
+
 void Minesweeper::revealCell(CellPosition cell)
 {
-    static bool isFirstReveal = true;
+    if (gameEnded)
+    {
+        return;
+    }
     if (isFirstReveal)
     {
         isFirstReveal = false;
@@ -38,6 +48,7 @@ void Minesweeper::revealCell(CellPosition cell)
     if (cellState == State::Mine)
     {
         board_.revealCell(cell);
+        gameEnded = true;
         onMineRevealed(cell);
         return;
     }
@@ -92,6 +103,11 @@ void Minesweeper::revealCell(CellPosition cell)
 
 void Minesweeper::markCell(CellPosition cell)
 {
+    if (gameEnded)
+    {
+        return;
+    }
+
     if (board_.isCellRevealed(cell))
     {
         return;

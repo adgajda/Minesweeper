@@ -46,6 +46,16 @@ void MouseListener::listen(sf::RenderWindow& window)
             rightButtonCallBack_(cellPos);
         }
     }
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
+    {
+        const core::CellPosition cellPos(
+          static_cast<unsigned int>(mousePosition.x) / cellSize, static_cast<unsigned int>(mousePosition.y) / cellSize);
+        if (middleButtonCallBack_)
+        {
+            lastButtonPressTime = std::chrono::high_resolution_clock::now();
+            middleButtonCallBack_();
+        }
+    }
 }
 
 void MouseListener::addLeftButtonCallback(std::function<void(core::CellPosition)>&& callback)
@@ -56,6 +66,11 @@ void MouseListener::addLeftButtonCallback(std::function<void(core::CellPosition)
 void MouseListener::addRightButtonCallback(std::function<void(core::CellPosition)>&& callback)
 {
     rightButtonCallBack_ = std::move(callback);
+}
+
+void MouseListener::addMiddleButtonCallback(std::function<void()>&& callback)
+{
+    middleButtonCallBack_ = std::move(callback);
 }
 
 
