@@ -30,20 +30,23 @@ enum class VisibleState
 
 struct Cell
 {
-    State state = State::Empty;
-    VisibleState visibleState = VisibleState::Covered;
+    State state_ = State::Empty;
+    VisibleState visibleState_ = VisibleState::Covered;
 };
 
 struct CellPosition
 {
-    size_t x{ 0 };
-    size_t y{ 0 };
+    CellPosition(size_t x, size_t y) : x_{ x }, y_{ y }
+    {
+    }
+    size_t x_{ 0 };
+    size_t y_{ 0 };
 };
 
 class Board
 {
 public:
-    Board(size_t boardSize);
+    explicit Board(size_t boardSize);
     void initBoard(const std::vector<CellPosition>& minesPositions);
     void revealCell(const CellPosition& position);
     void flagCell(const CellPosition& position);
@@ -57,7 +60,7 @@ private:
     void setNumberOfSurroundingMines();
     [[nodiscard]] State numberToState(unsigned number) const;
 
-    std::vector<std::vector<Cell>> matrix;
+    std::vector<std::vector<Cell>> matrix_;
 };
 
 }// namespace core

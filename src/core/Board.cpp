@@ -1,4 +1,5 @@
 #include "Board.hpp"
+#include <stdexcept>
 
 namespace minesweeper
 {
@@ -7,8 +8,8 @@ namespace core
 
 Board::Board(size_t boardSize)
 {
-    matrix.resize(boardSize);
-    for (auto& row : matrix)
+    matrix_.resize(boardSize);
+    for (auto& row : matrix_)
     {
         row.resize(boardSize);
     }
@@ -22,89 +23,89 @@ void Board::initBoard(const std::vector<CellPosition>& minesPositions)
 
 void Board::flagCell(const CellPosition& position)
 {
-    matrix[position.x][position.y].visibleState = VisibleState::Flagged;
+    matrix_[position.x_][position.y_].visibleState_ = VisibleState::Flagged;
 }
 
 void Board::unflagCell(const CellPosition& position)
 {
-    matrix[position.x][position.y].visibleState = VisibleState::Covered;
+    matrix_[position.x_][position.y_].visibleState_ = VisibleState::Covered;
 }
 
 void Board::revealCell(const CellPosition& position)
 {
-    matrix[position.x][position.y].visibleState = VisibleState::Revealed;
+    matrix_[position.x_][position.y_].visibleState_ = VisibleState::Revealed;
 }
 
 bool Board::isCellRevealed(const CellPosition& position) const
 {
-    return matrix[position.x][position.y].visibleState == VisibleState::Revealed;
+    return matrix_[position.x_][position.y_].visibleState_ == VisibleState::Revealed;
 }
 
 bool Board::isCellFlagged(const CellPosition& position) const
 {
-    return matrix[position.x][position.y].visibleState == VisibleState::Flagged;
+    return matrix_[position.x_][position.y_].visibleState_ == VisibleState::Flagged;
 }
 
 State Board::getCellState(const CellPosition& position) const
 {
-    return matrix[position.x][position.y].state;
+    return matrix_[position.x_][position.y_].state_;
 }
 
 void Board::placeMines(const std::vector<CellPosition>& minesPositions)
 {
     for (const auto& [x, y] : minesPositions)
     {
-        matrix[x][y].state = State::Mine;
+        matrix_[x][y].state_ = State::Mine;
     }
 }
 
 void Board::setNumberOfSurroundingMines()
 {
-    for (size_t i = 0; i < matrix.size(); ++i)
+    for (size_t i = 0; i < matrix_.size(); ++i)
     {
-        for (size_t j = 0; j < matrix.size(); ++j)
+        for (size_t j = 0; j < matrix_.size(); ++j)
         {
-            if (matrix[i][j].state == State::Mine)
+            if (matrix_[i][j].state_ == State::Mine)
             {
                 continue;
             }
 
             unsigned minesCounter{ 0 };
-            const auto isInRange = [this](size_t x, size_t y) { return x < matrix.size() && y < matrix.size(); };
-            if (isInRange(i - 1, j - 1) && matrix[i - 1][j].state == State::Mine)
+            const auto isInRange = [this](size_t x, size_t y) { return x < matrix_.size() && y < matrix_.size(); };
+            if (isInRange(i - 1, j - 1) && matrix_[i - 1][j].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i - 1, j) && matrix[i - 1][j].state == State::Mine)
+            if (isInRange(i - 1, j) && matrix_[i - 1][j].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i - 1, j + 1) && matrix[i - 1][j].state == State::Mine)
+            if (isInRange(i - 1, j + 1) && matrix_[i - 1][j].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i, j - 1) && matrix[i - 1][j].state == State::Mine)
+            if (isInRange(i, j - 1) && matrix_[i - 1][j].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i, j + 1) && matrix[i - 1][j].state == State::Mine)
+            if (isInRange(i, j + 1) && matrix_[i - 1][j].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i + 1, j - 1) && matrix[i - 1][j].state == State::Mine)
+            if (isInRange(i + 1, j - 1) && matrix_[i - 1][j].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i + 1, j) && matrix[i - 1][j].state == State::Mine)
+            if (isInRange(i + 1, j) && matrix_[i - 1][j].state_ == State::Mine)
             {
                 ++minesCounter;
             }
-            if (isInRange(i + 1, j + 1) && matrix[i - 1][j].state == State::Mine)
+            if (isInRange(i + 1, j + 1) && matrix_[i - 1][j].state_ == State::Mine)
             {
                 ++minesCounter;
             }
 
-            matrix[i][j].state = numberToState(minesCounter);
+            matrix_[i][j].state_ = numberToState(minesCounter);
         }
     }
 }
@@ -133,7 +134,7 @@ State Board::numberToState(unsigned number) const
         return State::Eight;
     }
 
-    throw("Too many mines");
+    throw std::runtime_error("Too many mines");
 }
 
 }// namespace core

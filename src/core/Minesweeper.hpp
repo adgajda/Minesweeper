@@ -23,6 +23,7 @@ protected:
     virtual void onMineRevealed() = 0;
     virtual void onCellRevealead() = 0;
     virtual void onCellFlagged() = 0;
+    virtual void onCellFlagRemoved() = 0;
 
     ~Minesweeper() = default;
 
