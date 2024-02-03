@@ -17,7 +17,6 @@ public:
     Minesweeper(Minesweeper&&) = delete;
     Minesweeper& operator=(Minesweeper&&) = delete;
 
-    void initGame(CellPosition firstRevealedCell);
     void revealCell(CellPosition cell);
     void markCell(CellPosition cell);
 
@@ -30,6 +29,8 @@ protected:
     ~Minesweeper() = default;
 
 private:
+    void init(CellPosition firstRevealedCell);
+
     Board board_;
     size_t boardSize_;
     unsigned numberOfMines_;

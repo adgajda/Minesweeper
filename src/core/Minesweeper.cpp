@@ -11,7 +11,7 @@ Minesweeper::Minesweeper(size_t boardSize, unsigned numberOfMines)
 {
 }
 
-void Minesweeper::initGame(CellPosition firstRevealedCell)
+void Minesweeper::init(CellPosition firstRevealedCell)
 {
     MineGenerator mineGenerator(boardSize_);
     board_.initBoard(mineGenerator.generateRandomPositionsWithoutRepetition(firstRevealedCell, numberOfMines_));
@@ -21,6 +21,14 @@ void Minesweeper::initGame(CellPosition firstRevealedCell)
 
 void Minesweeper::revealCell(CellPosition cell)
 {
+    static bool isFirstReveal = true;
+    if (isFirstReveal)
+    {
+        isFirstReveal = false;
+        init(cell);
+        return;
+    }
+
     if (board_.isCellRevealed(cell) || board_.isCellFlagged(cell))
     {
         return;
@@ -42,37 +50,37 @@ void Minesweeper::revealCell(CellPosition cell)
         const auto isCellValid = [this](const CellPosition& cellPos) {
             return cellPos.x_ < boardSize_ && cellPos.y_ < boardSize_;
         };
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
+        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_ - 1); isCellValid(cellToReveal))
         {
-            revealCell({ cell.x_ - 1, cell.y_ });
+            revealCell(cellToReveal);
         }
         if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
         {
-            revealCell({ cell.x_ - 1, cell.y_ - 1 });
+            revealCell(cellToReveal);
         }
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
+        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_ + 1); isCellValid(cellToReveal))
         {
-            revealCell({ cell.x_ - 1, cell.y_ + 1 });
+            revealCell(cellToReveal);
         }
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
+        if (const CellPosition cellToReveal(cell.x_, cell.y_ - 1); isCellValid(cellToReveal))
         {
-            revealCell({ cell.x_, cell.y_ - 1 });
+            revealCell(cellToReveal);
         }
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
+        if (const CellPosition cellToReveal(cell.x_, cell.y_ + 1); isCellValid(cellToReveal))
         {
-            revealCell({ cell.x_, cell.y_ + 1 });
+            revealCell(cellToReveal);
         }
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
+        if (const CellPosition cellToReveal(cell.x_ + 1, cell.y_ - 1); isCellValid(cellToReveal))
         {
-            revealCell({ cell.x_ + 1, cell.y_ });
+            revealCell(cellToReveal);
         }
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
+        if (const CellPosition cellToReveal(cell.x_ + 1, cell.y_); isCellValid(cellToReveal))
         {
-            revealCell({ cell.x_ - 1, cell.y_ - 1 });
+            revealCell(cellToReveal);
         }
-        if (const CellPosition cellToReveal(cell.x_ - 1, cell.y_); isCellValid(cellToReveal))
+        if (const CellPosition cellToReveal(cell.x_ + 1, cell.y_ + 1); isCellValid(cellToReveal))
         {
-            revealCell({ cell.x_ - 1, cell.y_ + 1 });
+            revealCell(cellToReveal);
         }
 
         return;

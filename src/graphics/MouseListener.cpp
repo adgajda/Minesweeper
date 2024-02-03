@@ -1,5 +1,6 @@
 #include "MouseListener.hpp"
 #include <SFML/Window/Mouse.hpp>
+#include <chrono>
 
 namespace minesweeper
 {
@@ -8,6 +9,14 @@ namespace graphics
 
 void MouseListener::listen(sf::RenderWindow& window)
 {
+    static auto lastButtonPressTime = std::chrono::high_resolution_clock::now();
+    const auto timeFromLastButtonPressed = std::chrono::duration_cast<std::chrono::milliseconds>(
+      std::chrono::high_resolution_clock::now() - lastButtonPressTime);
+    if (timeFromLastButtonPressed < std::chrono::milliseconds(150))
+    {
+        return;
+    }
+
     const auto mousePosition = sf::Mouse::getPosition(window);
     static const auto windowSize = window.getSize();
     if (mousePosition.x < 0 || mousePosition.y < 0 || static_cast<unsigned int>(mousePosition.x) > windowSize.x
@@ -23,6 +32,7 @@ void MouseListener::listen(sf::RenderWindow& window)
           static_cast<unsigned int>(mousePosition.x) / cellSize, static_cast<unsigned int>(mousePosition.y) / cellSize);
         if (leftButtonCallBack_)
         {
+            lastButtonPressTime = std::chrono::high_resolution_clock::now();
             leftButtonCallBack_(cellPos);
         }
     }
@@ -32,6 +42,7 @@ void MouseListener::listen(sf::RenderWindow& window)
           static_cast<unsigned int>(mousePosition.x) / cellSize, static_cast<unsigned int>(mousePosition.y) / cellSize);
         if (rightButtonCallBack_)
         {
+            lastButtonPressTime = std::chrono::high_resolution_clock::now();
             rightButtonCallBack_(cellPos);
         }
     }

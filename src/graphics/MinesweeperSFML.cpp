@@ -54,16 +54,19 @@ void MinesweeperSFML::onMineRevealed(const core::CellPosition&)
 {
 }
 
-void MinesweeperSFML::onCellRevealed(const core::CellPosition&, unsigned)
+void MinesweeperSFML::onCellRevealed(const core::CellPosition& cell, unsigned)
 {
+    cellSprites_[cell.x_][cell.y_].setTexture(texturesManager_.getTexture(MinesweeperTextures::Empty));
 }
 
-void MinesweeperSFML::onCellFlagged(const core::CellPosition&)
+void MinesweeperSFML::onCellFlagged(const core::CellPosition& cell)
 {
+    cellSprites_[cell.x_][cell.y_].setTexture(texturesManager_.getTexture(MinesweeperTextures::Flag));
 }
 
-void MinesweeperSFML::onCellFlagRemoved(const core::CellPosition&)
+void MinesweeperSFML::onCellFlagRemoved(const core::CellPosition& cell)
 {
+    cellSprites_[cell.x_][cell.y_].setTexture(texturesManager_.getTexture(MinesweeperTextures::Covered));
 }
 
 }// namespace graphics
