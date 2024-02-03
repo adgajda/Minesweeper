@@ -22,7 +22,7 @@ enum class State
     Eight,
 };
 
-inline unsigned StateToNumber(State state)
+[[nodiscard]] inline unsigned StateToNumber(State state)
 {
     switch (state)
     {
