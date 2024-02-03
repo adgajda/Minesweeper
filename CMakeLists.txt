@@ -5,7 +5,6 @@ project(Minesweeper)
 set(CMAKE_CXX_STANDARD 17)
 
 set(GCC_WARNINGS
-    -Werror
     -Wall
     -Wextra
     -Wshadow
@@ -26,6 +25,6 @@ set(GCC_WARNINGS
     -Wuseless-cast
 )
 
-add_compile_options(${GCC_WARNINGS})
+add_compile_options(-Werror ${GCC_WARNINGS} -O2)
 
 add_subdirectory(src)
