@@ -2,6 +2,10 @@
 
 Welcome to the Minesweeper project! This is just my one weekend project made for fun, and it's built using SFML (Simple and Fast Multimedia Library) to handle graphics and interactions. I'm happy to help or provide any further information to anyone who's interested in the project. Feel free to reach out if you have questions, suggestions, or if you'd like to contribute in any way!
 
+<p align="center">
+    <img src="minesweeper.png" alt="Minesweeper screenshot">
+</p>
+
 # How To Play
 
 Getting started with Minesweeper is easy, but mastering it requires careful thought and strategy. Here's how you can control the game:

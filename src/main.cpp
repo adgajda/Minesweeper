@@ -3,7 +3,7 @@
 
 int main()
 {
-    minesweeper::graphics::Game game(21, 13);
+    minesweeper::graphics::Game game(21, 80);
     game.initGame();
     game.gameLoop();
     return 0;
