@@ -1,7 +1,7 @@
 #pragma once
 #include "MinesweeperSFML.hpp"
 #include "MouseListener.hpp"
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <cstddef>
 #include <memory>
 

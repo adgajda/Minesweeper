@@ -1,10 +1,14 @@
 #pragma once
-#include "core/Board.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <functional>
 
 namespace minesweeper
 {
+namespace core
+{
+struct CellPosition;
+}
+
 namespace graphics
 {
 

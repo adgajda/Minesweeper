@@ -1,4 +1,5 @@
 #include "MineGenerator.hpp"
+#include "Board.hpp"
 #include <algorithm>
 #include <numeric>
 #include <random>

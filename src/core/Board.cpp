@@ -26,7 +26,7 @@ void Board::initBoard(const std::vector<CellPosition>& minesPositions)
 
 bool Board::isGameWon() const
 {
-    const auto numberOfCells{ boardSize_ * boardSize_ };
+    static auto numberOfCells{ boardSize_ * boardSize_ };
     const auto cellsLeft{ numberOfCells - cellsRevealed_ };
     return cellsLeft == numberOfMines_;
 }

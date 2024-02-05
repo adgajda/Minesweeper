@@ -1,5 +1,8 @@
 #include "MinesweeperSFML.hpp"
 #include "core/Board.hpp"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <cstddef>
 
 namespace minesweeper
 {

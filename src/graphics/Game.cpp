@@ -1,4 +1,7 @@
 #include "Game.hpp"
+#include "core/Board.hpp"
+#include <SFML/Window/Event.hpp>
+#include <SFML/Window/VideoMode.hpp>
 
 namespace minesweeper
 {

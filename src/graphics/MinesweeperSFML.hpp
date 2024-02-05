@@ -3,11 +3,19 @@
 #include "core/Minesweeper.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <vector>
 
 namespace minesweeper
 {
+namespace core
+{
+struct CellPosition;
+}
+
 namespace graphics
 {
+
+enum class MinesweeperTextures;
 
 class MinesweeperSFML final : public core::Minesweeper
 {

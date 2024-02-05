@@ -1,6 +1,7 @@
 #include "MouseListener.hpp"
+#include "core/Board.hpp"
 #include <SFML/Window/Mouse.hpp>
-#include <chrono>
+#include <utility>
 
 namespace minesweeper
 {
@@ -51,15 +52,15 @@ void MouseListener::listen(sf::RenderWindow& window)
 {
     const auto mousePosition = sf::Mouse::getPosition(window);
     static const auto windowSize = window.getSize();
-    if (mousePosition.x < 0 || mousePosition.y < 0 || static_cast<unsigned int>(mousePosition.x) > windowSize.x
-        || static_cast<unsigned int>(mousePosition.y) > windowSize.y)
+    if (mousePosition.x < 0 || mousePosition.y < 0 || static_cast<unsigned>(mousePosition.x) > windowSize.x
+        || static_cast<unsigned>(mousePosition.y) > windowSize.y)
     {
         return;
     }
 
     const unsigned cellSize{ 21 };
     const core::CellPosition cellPos(
-      static_cast<unsigned int>(mousePosition.x) / cellSize, static_cast<unsigned int>(mousePosition.y) / cellSize);
+      static_cast<unsigned>(mousePosition.x) / cellSize, static_cast<unsigned>(mousePosition.y) / cellSize);
     handleButtonEvent<LeftButton>(leftButtonCallBack_, cellPos);
     handleButtonEvent<RightButton>(rightButtonCallBack_, cellPos);
     handleButtonEvent<MiddleButton>(middleButtonCallBack_, cellPos);

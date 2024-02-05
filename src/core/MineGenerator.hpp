@@ -1,5 +1,4 @@
 #pragma once
-#include "Board.hpp"
 #include <cstddef>
 #include <vector>
 
@@ -7,6 +6,7 @@ namespace minesweeper
 {
 namespace core
 {
+struct CellPosition;
 
 class MineGenerator final
 {

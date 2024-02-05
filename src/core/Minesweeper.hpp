@@ -1,6 +1,6 @@
 #pragma once
 #include "Board.hpp"
-
+#include <cstddef>
 namespace minesweeper
 {
 namespace core
