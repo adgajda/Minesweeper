@@ -20,7 +20,7 @@ enum class MinesweeperTextures;
 class MinesweeperSFML final : public core::Minesweeper
 {
 public:
-    MinesweeperSFML(size_t boardSize, unsigned numberOfMines);
+    MinesweeperSFML(std::size_t boardSize, unsigned numberOfMines);
     void draw(sf::RenderWindow& window);
 
 private:

@@ -8,7 +8,7 @@ namespace minesweeper
 namespace graphics
 {
 
-Game::Game(size_t boardSize, unsigned numberOfMines) : boardSize_{ boardSize }, numberOfMines_{ numberOfMines }
+Game::Game(std::size_t boardSize, unsigned numberOfMines) : boardSize_{ boardSize }, numberOfMines_{ numberOfMines }
 {
 }
 

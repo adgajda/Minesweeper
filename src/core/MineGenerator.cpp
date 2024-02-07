@@ -10,7 +10,7 @@ namespace minesweeper
 namespace core
 {
 
-MineGenerator::MineGenerator(size_t boardSize) : boardSize_{ boardSize }
+MineGenerator::MineGenerator(std::size_t boardSize) : boardSize_{ boardSize }
 {
 }
 
@@ -22,11 +22,11 @@ std::vector<CellPosition> MineGenerator::generateRandomPositionsWithoutRepetitio
         throw std::runtime_error("Too many mines");
     }
 
-    std::vector<size_t> randomCells(boardSize_ * boardSize_);
+    std::vector<std::size_t> randomCells(boardSize_ * boardSize_);
     std::iota(randomCells.begin(), randomCells.end(), 0);
     std::shuffle(randomCells.begin(), randomCells.end(), std::mt19937{ std::random_device{}() });
 
-    const size_t firstCell{ firstReveleadCell.x_ * boardSize_ + firstReveleadCell.y_ };
+    const std::size_t firstCell{ firstReveleadCell.x_ * boardSize_ + firstReveleadCell.y_ };
     std::vector<CellPosition> retVal;
     retVal.reserve(numberOfMines);
     for (unsigned i = 0; i < numberOfMines; ++i)

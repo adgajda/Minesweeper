@@ -9,7 +9,7 @@ namespace core
 class Minesweeper
 {
 public:
-    Minesweeper(size_t boardSize, unsigned numberOfMines);
+    Minesweeper(std::size_t boardSize, unsigned numberOfMines);
 
     Minesweeper(const Minesweeper&) = delete;
     Minesweeper& operator=(const Minesweeper&) = delete;
@@ -35,7 +35,7 @@ protected:
 private:
     void init(CellPosition firstRevealedCell);
 
-    size_t boardSize_;
+    std::size_t boardSize_;
     unsigned numberOfMines_;
     bool gameEnded = false;
     bool isFirstReveal = true;

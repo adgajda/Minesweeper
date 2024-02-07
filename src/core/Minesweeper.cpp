@@ -6,7 +6,7 @@ namespace minesweeper
 namespace core
 {
 
-Minesweeper::Minesweeper(size_t boardSize, unsigned numberOfMines)
+Minesweeper::Minesweeper(std::size_t boardSize, unsigned numberOfMines)
   : board_(boardSize), boardSize_(boardSize), numberOfMines_{ numberOfMines }
 {
 }
@@ -66,7 +66,7 @@ void Minesweeper::revealCell(CellPosition cell)
         for (const auto& neighbor : cellNeighbors)
         {
             const CellPosition cellToReveal(
-              cell.x_ + static_cast<size_t>(neighbor.first), cell.y_ + static_cast<size_t>(neighbor.second));
+              cell.x_ + static_cast<std::size_t>(neighbor.first), cell.y_ + static_cast<std::size_t>(neighbor.second));
             if (isCellValid(cellToReveal))
             {
                 revealCell(cellToReveal);

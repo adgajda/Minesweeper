@@ -9,7 +9,7 @@ namespace minesweeper
 namespace graphics
 {
 
-MinesweeperSFML::MinesweeperSFML(size_t boardSize, unsigned numberOfMines)
+MinesweeperSFML::MinesweeperSFML(std::size_t boardSize, unsigned numberOfMines)
   : Minesweeper(boardSize, numberOfMines), texturesManager_("../textures/")// TODO: PATH should not be hardcoded
 {
     texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_0.png", MinesweeperTextures::Empty);
@@ -32,9 +32,9 @@ MinesweeperSFML::MinesweeperSFML(size_t boardSize, unsigned numberOfMines)
         row.resize(boardSize);
     }
 
-    for (size_t i = 0; i < boardSize; ++i)
+    for (std::size_t i = 0; i < boardSize; ++i)
     {
-        for (size_t j = 0; j < boardSize; ++j)
+        for (std::size_t j = 0; j < boardSize; ++j)
         {
             cellSprites_[i][j].setTexture(texturesManager_.getTexture(MinesweeperTextures::Covered));
             const float cellSize{ 21.f };

@@ -11,12 +11,12 @@ struct CellPosition;
 class MineGenerator final
 {
 public:
-    explicit MineGenerator(size_t boardSize);
+    explicit MineGenerator(std::size_t boardSize);
     [[nodiscard]] std::vector<CellPosition>
       generateRandomPositionsWithoutRepetition(const CellPosition& firstReveleadCell, unsigned numberOfMines);
 
 private:
-    size_t boardSize_;
+    std::size_t boardSize_;
 };
 
 }// namespace core

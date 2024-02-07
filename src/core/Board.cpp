@@ -5,7 +5,7 @@ namespace minesweeper
 namespace core
 {
 
-Board::Board(size_t boardSize) : boardSize_{ boardSize }
+Board::Board(std::size_t boardSize) : boardSize_{ boardSize }
 {
 }
 
@@ -77,9 +77,9 @@ void Board::placeMines(const std::vector<CellPosition>& minesPositions)
 
 void Board::setNumberOfSurroundingMines()
 {
-    for (size_t i = 0; i < matrix_.size(); ++i)
+    for (std::size_t i = 0; i < matrix_.size(); ++i)
     {
-        for (size_t j = 0; j < matrix_.size(); ++j)
+        for (std::size_t j = 0; j < matrix_.size(); ++j)
         {
             if (matrix_[i][j].state_ == State::Mine)
             {
@@ -93,7 +93,7 @@ void Board::setNumberOfSurroundingMines()
             for (const auto& neighbor : cellNeighbors)
             {
                 const CellPosition cellToReveal(
-                  i + static_cast<size_t>(neighbor.first), j + static_cast<size_t>(neighbor.second));
+                  i + static_cast<std::size_t>(neighbor.first), j + static_cast<std::size_t>(neighbor.second));
                 if (isCellValid(cellToReveal) && matrix_[cellToReveal.x_][cellToReveal.y_].state_ == State::Mine)
                 {
                     ++minesCounter;

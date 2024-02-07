@@ -68,11 +68,11 @@ struct Cell
 
 struct CellPosition
 {
-    CellPosition(size_t x, size_t y) : x_{ x }, y_{ y }
+    CellPosition(std::size_t x, std::size_t y) : x_{ x }, y_{ y }
     {
     }
-    size_t x_{ 0 };
-    size_t y_{ 0 };
+    std::size_t x_{ 0 };
+    std::size_t y_{ 0 };
 };
 
 inline constexpr std::array<std::pair<int, int>, 8> cellNeighbors = {
@@ -82,7 +82,7 @@ inline constexpr std::array<std::pair<int, int>, 8> cellNeighbors = {
 class Board final
 {
 public:
-    explicit Board(size_t boardSize);
+    explicit Board(std::size_t boardSize);
     void initBoard(const std::vector<CellPosition>& minesPositions);
     void revealCell(const CellPosition& position);
     void flagCell(const CellPosition& position);
@@ -100,7 +100,7 @@ private:
 
     std::vector<std::vector<Cell>> matrix_;
     std::vector<CellPosition> mines_;
-    size_t boardSize_;
+    std::size_t boardSize_;
     unsigned numberOfMines_ = 0;
     unsigned cellsRevealed_ = 0;
 };
