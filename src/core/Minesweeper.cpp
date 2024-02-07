@@ -7,7 +7,7 @@ namespace core
 {
 
 Minesweeper::Minesweeper(std::size_t boardSize, unsigned numberOfMines)
-  : board_(boardSize), boardSize_(boardSize), numberOfMines_{ numberOfMines }
+  : boardSize_{ boardSize }, numberOfMines_{ numberOfMines }
 {
 }
 
@@ -18,32 +18,32 @@ void Minesweeper::restart()
     onRestart();
 }
 
-void Minesweeper::revealCell(CellPosition cell)
+void Minesweeper::revealCell(const CellPosition& cell)
 {
     if (isFirstReveal && !gameEnded)
     {
         isFirstReveal = false;
-        init(cell);
+        revealFirstCell(cell);
         return;
     }
 
-    if (gameEnded || board_.isCellRevealed(cell) || board_.isCellFlagged(cell))
+    if (gameEnded || board_->isCellRevealed(cell) || board_->isCellFlagged(cell))
     {
         return;
     }
 
-    const State cellState = board_.getCellState(cell);
+    const State cellState = board_->getCellState(cell);
     if (cellState == State::Mine)
     {
-        board_.revealCell(cell);
+        board_->revealCell(cell);
         gameEnded = true;
-        onMineRevealed(cell);
+        onGameLost(cell);
         return;
     }
 
-    board_.revealCell(cell);
+    board_->revealCell(cell);
     onCellRevealed(cell, StateToNumber(cellState));
-    if (board_.isGameWon())
+    if (board_->isGameWon())
     {
         gameEnded = true;
         onGameWon();
@@ -67,29 +67,30 @@ void Minesweeper::revealCell(CellPosition cell)
     }
 }
 
-void Minesweeper::init(CellPosition firstRevealedCell)
+void Minesweeper::revealFirstCell(const CellPosition& firstRevealedCell)
 {
     MineGenerator mineGenerator(boardSize_);
-    board_.initBoard(mineGenerator.generateRandomPositionsWithoutRepetition(firstRevealedCell, numberOfMines_));
+    board_ = std::make_unique<Board>(
+      boardSize_, mineGenerator.generateRandomPositionsWithoutRepetition(firstRevealedCell, numberOfMines_));
 
     revealCell(firstRevealedCell);
 }
 
-void Minesweeper::markCell(CellPosition cell)
+void Minesweeper::markCell(const CellPosition& cell)
 {
-    if (gameEnded || board_.isCellRevealed(cell))
+    if (gameEnded || board_->isCellRevealed(cell))
     {
         return;
     }
 
-    if (board_.isCellFlagged(cell))
+    if (board_->isCellFlagged(cell))
     {
-        board_.unflagCell(cell);
+        board_->unflagCell(cell);
         onCellFlagRemoved(cell);
     }
     else
     {
-        board_.flagCell(cell);
+        board_->flagCell(cell);
         onCellFlagged(cell);
     }
 }

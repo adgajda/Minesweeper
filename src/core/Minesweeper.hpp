@@ -1,6 +1,8 @@
 #pragma once
 #include "Board.hpp"
 #include <cstddef>
+#include <memory>
+
 namespace minesweeper
 {
 namespace core
@@ -18,11 +20,11 @@ public:
     Minesweeper& operator=(Minesweeper&&) = delete;
 
     void restart();
-    void revealCell(CellPosition cell);
-    void markCell(CellPosition cell);
+    void revealCell(const CellPosition& cell);
+    void markCell(const CellPosition& cell);
 
 protected:
-    virtual void onMineRevealed(const CellPosition& cell) = 0;
+    virtual void onGameLost(const CellPosition& cell) = 0;
     virtual void onCellRevealed(const CellPosition& cell, unsigned minesAround) = 0;
     virtual void onCellFlagged(const CellPosition& cell) = 0;
     virtual void onCellFlagRemoved(const CellPosition& cell) = 0;
@@ -30,10 +32,10 @@ protected:
     virtual void onGameWon() = 0;
     ~Minesweeper() = default;
 
-    Board board_;
+    std::unique_ptr<Board> board_;
 
 private:
-    void init(CellPosition firstRevealedCell);
+    void revealFirstCell(const CellPosition& firstRevealedCell);
 
     std::size_t boardSize_;
     unsigned numberOfMines_;

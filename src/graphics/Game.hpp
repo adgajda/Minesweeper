@@ -3,7 +3,6 @@
 #include "MouseListener.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <cstddef>
-#include <memory>
 
 namespace minesweeper
 {
@@ -14,15 +13,15 @@ class Game final
 {
 public:
     Game(std::size_t boardSize, unsigned numberOfMines);
-    void initGame();
     void gameLoop();
 
 private:
-    std::unique_ptr<MinesweeperSFML> minesweeperSFML_;
-    std::unique_ptr<sf::RenderWindow> window_;
-    std::unique_ptr<MouseListener> mouseListener_;
+    static constexpr unsigned cellSize{ 21 };
     std::size_t boardSize_;
     unsigned numberOfMines_;
+    MinesweeperSFML minesweeperSFML_;
+    MouseListener mouseListener_;
+    sf::RenderWindow window_;
 };
 
 }// namespace graphics

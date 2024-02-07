@@ -66,12 +66,12 @@ void MouseListener::listen(sf::RenderWindow& window)
     handleButtonEvent<MiddleButton>(middleButtonCallBack_, cellPos);
 }
 
-void MouseListener::addLeftButtonCallback(std::function<void(core::CellPosition)>&& callback)
+void MouseListener::addLeftButtonCallback(std::function<void(const core::CellPosition&)>&& callback)
 {
     leftButtonCallBack_ = std::move(callback);
 }
 
-void MouseListener::addRightButtonCallback(std::function<void(core::CellPosition)>&& callback)
+void MouseListener::addRightButtonCallback(std::function<void(const core::CellPosition&)>&& callback)
 {
     rightButtonCallBack_ = std::move(callback);
 }

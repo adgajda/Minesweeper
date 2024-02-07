@@ -82,8 +82,7 @@ inline constexpr std::array<std::pair<int, int>, 8> cellNeighbors = {
 class Board final
 {
 public:
-    explicit Board(std::size_t boardSize);
-    void initBoard(const std::vector<CellPosition>& minesPositions);
+    Board(std::size_t boardSize, const std::vector<CellPosition>& minesPositions);
     void revealCell(const CellPosition& position);
     void flagCell(const CellPosition& position);
     void unflagCell(const CellPosition& position);

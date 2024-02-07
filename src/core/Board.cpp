@@ -5,11 +5,7 @@ namespace minesweeper
 namespace core
 {
 
-Board::Board(std::size_t boardSize) : boardSize_{ boardSize }
-{
-}
-
-void Board::initBoard(const std::vector<CellPosition>& minesPositions)
+Board::Board(std::size_t boardSize, const std::vector<CellPosition>& minesPositions) : boardSize_{ boardSize }
 {
     mines_ = minesPositions;
     numberOfMines_ = minesPositions.size();

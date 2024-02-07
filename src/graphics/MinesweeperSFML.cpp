@@ -54,7 +54,7 @@ void MinesweeperSFML::draw(sf::RenderWindow& window)
     }
 }
 
-void MinesweeperSFML::onMineRevealed(const core::CellPosition&)
+void MinesweeperSFML::onGameLost(const core::CellPosition&)
 {
     for (auto& row : cellSprites_)
     {
@@ -122,7 +122,7 @@ void MinesweeperSFML::onRestart()
 
 void MinesweeperSFML::onGameWon()
 {
-    std::vector<core::CellPosition> mines = board_.getMinesPositions();
+    std::vector<core::CellPosition> mines = board_->getMinesPositions();
     for (const auto& minePosition : mines)
     {
         cellSprites_[minePosition.x_][minePosition.y_].setTexture(

@@ -24,7 +24,7 @@ public:
     void draw(sf::RenderWindow& window);
 
 private:
-    void onMineRevealed(const core::CellPosition& cell) override;
+    void onGameLost(const core::CellPosition& cell) override;
     void onCellRevealed(const core::CellPosition& cell, unsigned minesAround) override;
     void onCellFlagged(const core::CellPosition& cell) override;
     void onCellFlagRemoved(const core::CellPosition& cell) override;
