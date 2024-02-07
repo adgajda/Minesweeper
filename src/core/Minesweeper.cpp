@@ -11,14 +11,6 @@ Minesweeper::Minesweeper(std::size_t boardSize, unsigned numberOfMines)
 {
 }
 
-void Minesweeper::init(CellPosition firstRevealedCell)
-{
-    MineGenerator mineGenerator(boardSize_);
-    board_.initBoard(mineGenerator.generateRandomPositionsWithoutRepetition(firstRevealedCell, numberOfMines_));
-
-    revealCell(firstRevealedCell);
-}
-
 void Minesweeper::restart()
 {
     gameEnded = false;
@@ -73,6 +65,14 @@ void Minesweeper::revealCell(CellPosition cell)
             }
         }
     }
+}
+
+void Minesweeper::init(CellPosition firstRevealedCell)
+{
+    MineGenerator mineGenerator(boardSize_);
+    board_.initBoard(mineGenerator.generateRandomPositionsWithoutRepetition(firstRevealedCell, numberOfMines_));
+
+    revealCell(firstRevealedCell);
 }
 
 void Minesweeper::markCell(CellPosition cell)
