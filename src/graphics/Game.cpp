@@ -8,16 +8,16 @@ namespace minesweeper
 namespace graphics
 {
 
-Game::Game(size_t boardSize, unsigned numberOfMines)
+Game::Game(std::size_t boardSize, unsigned numberOfMines)
   : boardSize_{ boardSize }, numberOfMines_{ numberOfMines }, minesweeperSFML_(boardSize_, numberOfMines_),
-    window_(sf::VideoMode(boardSize_ * cellSize, boardSize_ * cellSize), "Minesweeper")
+    window_(sf::VideoMode(boardSize_ * cellSize_, boardSize_ * cellSize_), "Minesweeper")
 {
     mouseListener_.addLeftButtonCallback([this](const core::CellPosition& cell) { minesweeperSFML_.revealCell(cell); });
     mouseListener_.addRightButtonCallback([this](const core::CellPosition& cell) { minesweeperSFML_.markCell(cell); });
     mouseListener_.addMiddleButtonCallback([this]() { minesweeperSFML_.restart(); });
 }
 
-void Game::gameLoop()
+void Game::play()
 {
     while (window_.isOpen())
     {
@@ -25,7 +25,9 @@ void Game::gameLoop()
         while (window_.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
                 window_.close();
+            }
         }
 
         mouseListener_.listen(window_);

@@ -24,12 +24,12 @@ public:
     void draw(sf::RenderWindow& window);
 
 private:
-    void onGameLost(const core::CellPosition& cell) override;
     void onCellRevealed(const core::CellPosition& cell, unsigned minesAround) override;
     void onCellFlagged(const core::CellPosition& cell) override;
     void onCellFlagRemoved(const core::CellPosition& cell) override;
-    void onRestart() override;
+    void onGameLost(const core::CellPosition& cell) override;
     void onGameWon() override;
+    void onRestart() override;
 
     TexturesManager<MinesweeperTextures> texturesManager_;
     std::vector<std::vector<sf::Sprite>> cellSprites_;

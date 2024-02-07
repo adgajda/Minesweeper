@@ -54,17 +54,6 @@ void MinesweeperSFML::draw(sf::RenderWindow& window)
     }
 }
 
-void MinesweeperSFML::onGameLost(const core::CellPosition&)
-{
-    for (auto& row : cellSprites_)
-    {
-        for (auto& sprite : row)
-        {
-            sprite.setTexture(texturesManager_.getTexture(MinesweeperTextures::MineHit));
-        }
-    }
-}
-
 void MinesweeperSFML::onCellRevealed(const core::CellPosition& cell, unsigned minesAround)
 {
     switch (minesAround)
@@ -109,15 +98,9 @@ void MinesweeperSFML::onCellFlagRemoved(const core::CellPosition& cell)
     cellSprites_[cell.x_][cell.y_].setTexture(texturesManager_.getTexture(MinesweeperTextures::Covered));
 }
 
-void MinesweeperSFML::onRestart()
+void MinesweeperSFML::onGameLost(const core::CellPosition& cell)
 {
-    for (auto& row : cellSprites_)
-    {
-        for (auto& sprite : row)
-        {
-            sprite.setTexture(texturesManager_.getTexture(MinesweeperTextures::Covered));
-        }
-    }
+    cellSprites_[cell.x_][cell.y_].setTexture(texturesManager_.getTexture(MinesweeperTextures::MineHit));
 }
 
 void MinesweeperSFML::onGameWon()
@@ -127,6 +110,17 @@ void MinesweeperSFML::onGameWon()
     {
         cellSprites_[minePosition.x_][minePosition.y_].setTexture(
           texturesManager_.getTexture(MinesweeperTextures::Mine));
+    }
+}
+
+void MinesweeperSFML::onRestart()
+{
+    for (auto& row : cellSprites_)
+    {
+        for (auto& sprite : row)
+        {
+            sprite.setTexture(texturesManager_.getTexture(MinesweeperTextures::Covered));
+        }
     }
 }
 

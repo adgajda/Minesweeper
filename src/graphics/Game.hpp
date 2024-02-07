@@ -13,10 +13,10 @@ class Game final
 {
 public:
     Game(std::size_t boardSize, unsigned numberOfMines);
-    void gameLoop();
+    void play();
 
 private:
-    static constexpr unsigned cellSize{ 21 };
+    static constexpr unsigned cellSize_{ 21 };
     std::size_t boardSize_;
     unsigned numberOfMines_;
     MinesweeperSFML minesweeperSFML_;
