@@ -22,23 +22,19 @@ std::vector<CellPosition> MineGenerator::generateRandomPositionsWithoutRepetitio
         throw std::runtime_error("Too many mines");
     }
 
-    std::vector<std::size_t> randomCells(boardSize_ * boardSize_);
-    std::iota(randomCells.begin(), randomCells.end(), 0);
-    std::shuffle(randomCells.begin(), randomCells.end(), std::mt19937{ std::random_device{}() });
-
-    const std::size_t firstCell{ firstReveleadCell.x_ * boardSize_ + firstReveleadCell.y_ };
-    std::vector<CellPosition> retVal;
-    retVal.reserve(numberOfMines);
-    for (unsigned i = 0; i < numberOfMines; ++i)
+    std::vector<CellPosition> randomCells;
+    randomCells.reserve(boardSize_ * boardSize_ - 1);
+    for (std::size_t i = 0; i < boardSize_ * boardSize_; ++i)
     {
-        if (randomCells[i] == firstCell)
+        if (i / boardSize_ != firstReveleadCell.x_ || i % boardSize_ != firstReveleadCell.y_)
         {
-            continue;
+            randomCells.emplace_back(i / boardSize_, i % boardSize_);
         }
-        retVal.emplace_back(randomCells[i] / boardSize_, randomCells[i] % boardSize_);
     }
+    std::shuffle(randomCells.begin(), randomCells.end(), std::mt19937{ std::random_device{}() });
+    randomCells.resize(numberOfMines);
 
-    return retVal;
+    return randomCells;
 }
 
 }// namespace core

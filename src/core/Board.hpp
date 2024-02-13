@@ -68,6 +68,7 @@ struct Cell
 
 struct CellPosition
 {
+    CellPosition() = default;
     CellPosition(std::size_t x, std::size_t y) : x_{ x }, y_{ y }
     {
     }
