@@ -3,7 +3,6 @@ add_executable(minesweeper
     main.cpp 
     core/Board.cpp
     core/MineGenerator.cpp
-    core/Minesweeper.cpp
     graphics/Game.cpp
     graphics/MinesweeperSFML.cpp
     graphics/MouseListener.cpp

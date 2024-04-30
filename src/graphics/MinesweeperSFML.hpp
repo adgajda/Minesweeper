@@ -17,19 +17,20 @@ namespace graphics
 
 enum class MinesweeperTextures;
 
-class MinesweeperSFML final : public core::Minesweeper
+class MinesweeperSFML final : public core::Minesweeper<MinesweeperSFML>
 {
 public:
     MinesweeperSFML(std::size_t boardSize, unsigned numberOfMines);
     void draw(sf::RenderWindow& window);
 
 private:
-    void onCellRevealed(const core::CellPosition& cell, unsigned minesAround) override;
-    void onCellFlagged(const core::CellPosition& cell) override;
-    void onCellFlagRemoved(const core::CellPosition& cell) override;
-    void onGameLost(const core::CellPosition& cell) override;
-    void onGameWon() override;
-    void onRestart() override;
+    friend core::Minesweeper<MinesweeperSFML>;
+    void onCellRevealed(const core::CellPosition& cell, unsigned minesAround);
+    void onCellFlagged(const core::CellPosition& cell);
+    void onCellFlagRemoved(const core::CellPosition& cell);
+    void onGameLost(const core::CellPosition& cell);
+    void onGameWon();
+    void onRestart();
 
     TexturesManager<MinesweeperTextures> texturesManager_;
     std::vector<std::vector<sf::Sprite>> cellSprites_;
