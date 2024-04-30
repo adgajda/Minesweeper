@@ -1,6 +1,6 @@
 #pragma once
 #include "TexturesManager.hpp"
-#include "core/Minesweeper.hpp"
+#include "core/MinesweeperCRTP.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <vector>
@@ -17,14 +17,14 @@ namespace graphics
 
 enum class MinesweeperTextures;
 
-class MinesweeperSFML final : public core::Minesweeper<MinesweeperSFML>
+class MinesweeperSFML final : public core::MinesweeperCRTP<MinesweeperSFML>
 {
 public:
     MinesweeperSFML(std::size_t boardSize, unsigned numberOfMines);
     void draw(sf::RenderWindow& window);
 
 private:
-    friend core::Minesweeper<MinesweeperSFML>;
+    friend MinesweeperCRTP;
     void onCellRevealed(const core::CellPosition& cell, unsigned minesAround);
     void onCellFlagged(const core::CellPosition& cell);
     void onCellFlagRemoved(const core::CellPosition& cell);

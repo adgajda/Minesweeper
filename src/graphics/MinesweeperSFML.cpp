@@ -10,7 +10,7 @@ namespace graphics
 {
 
 MinesweeperSFML::MinesweeperSFML(std::size_t boardSize, unsigned numberOfMines)
-  : Minesweeper(boardSize, numberOfMines), texturesManager_("../textures/")// TODO: PATH should not be hardcoded
+  : MinesweeperCRTP(boardSize, numberOfMines), texturesManager_("../textures/")// TODO: PATH should not be hardcoded
 {
     texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_0.png", MinesweeperTextures::Empty);
     texturesManager_.loadTexture("Minesweeper_LAZARUS_21x21_1.png", MinesweeperTextures::One);

@@ -10,18 +10,19 @@ namespace core
 {
 
 template<typename MinesweeperImpl>
-class Minesweeper
+class MinesweeperCRTP
 {
 public:
-    Minesweeper(std::size_t boardSize, unsigned numberOfMines)
+    MinesweeperCRTP(std::size_t boardSize, unsigned numberOfMines)
       : boardSize_{ boardSize }, numberOfMines_{ numberOfMines }
     {
     }
 
-    Minesweeper(const Minesweeper&) = delete;
-    Minesweeper& operator=(const Minesweeper&) = delete;
-    Minesweeper(Minesweeper&&) = delete;
-    Minesweeper& operator=(Minesweeper&&) = delete;
+    ~MinesweeperCRTP() = default;
+    MinesweeperCRTP(const MinesweeperCRTP&) = delete;
+    MinesweeperCRTP& operator=(const MinesweeperCRTP&) = delete;
+    MinesweeperCRTP(MinesweeperCRTP&&) = delete;
+    MinesweeperCRTP& operator=(MinesweeperCRTP&&) = delete;
 
     void restart()
     {
